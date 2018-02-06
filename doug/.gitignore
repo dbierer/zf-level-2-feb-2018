@@ -1,0 +1,5 @@
+vendor/
+data/cache/*
+!data/cache/.gitkeep
+public/captcha
+phpunit.xml
