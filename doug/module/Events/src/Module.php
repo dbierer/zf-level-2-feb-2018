@@ -1,6 +1,8 @@
 <?php
 namespace Events;
 
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\AbstractFactoryInterface;
 use Zend\ServiceManager\Factory\InvokableFactory;
 use Zend\Db\Adapter\Adapter;
 use Zend\Filter;
@@ -65,16 +67,14 @@ class Module
             ],
             'abstract_factories' => [
                 //*** define an abstract factory which sets the tableGateway property for all table module classes
-                'events-table-abstract-factory' => new class () implements \Zend\ServiceManager\Factory\AbstractFactoryInterface {
-                    public function canCreate(\Interop\Container\ContainerInterface $container, $requestedName)
+                'events-table-abstract-factory' => new class () implements AbstractFactoryInterface {
+                    public function canCreate(ContainerInterface $container, $requestedName)
                     {
-                        return (substr($requestedName,-5)=='Table') ? TRUE : FALSE;
+                        return (substr($requestedName,-5)=='Table');
                     }
-                    public function __invoke(\Interop\Container\ContainerInterface $container, $requestedName, ?array $options = NULL)
+                    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = NULL)
                     {
-                        $breakdown = explode('\\', $requestedName);
-                        $class     = 'Events\\Model\\' . array_pop($breakdown);
-                        $table     = new $class();
+                        $table     = new $requestedName();
                         $table->setTableGateway($container->get('events-db-adapter'));
                         return $table;
                     }
