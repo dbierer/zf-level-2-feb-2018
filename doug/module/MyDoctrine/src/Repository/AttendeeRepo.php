@@ -2,6 +2,8 @@
 namespace MyDoctrine\Repository;
 
 //*** need "use" statements
+use Doctrine\ORM\EntityRepository;
+use MyDoctrine\Entity\Attendee;
 
 class AttendeeRepo extends EntityRepository
 {
@@ -15,6 +17,12 @@ class AttendeeRepo extends EntityRepository
     {
         //*** need code to save to the database
         //*** don't forget to flush!!!
+        $attendee = new Attendee();
+        $attendee->setRegistration($regEntity);
+        $attendee->setName($nameOnTicket);
+        $em = $this->getEntityManager();
+        $em->persist($attendee);
+        $em->flush();
         return $attendee;
     }
 }

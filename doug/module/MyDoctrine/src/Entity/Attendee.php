@@ -2,19 +2,33 @@
 namespace MyDoctrine\Entity;
 
 //*** need "use" statement
+use Doctrine\ORM\Mapping as ORM;
+
 
 //*** finish the entity annotation
 /**
+ * @ORM\Entity("MyDoctrine\Entity\Attendee")
  * @ORM\Table("attendee_d")
  */
 class Attendee
 {
     //*** need annotations for each property
+    /**
+     * @ORM\Column(type="integer", length=11)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
     protected $id;
 
     //*** configure a many to one relationship to to Registration
+    /**
+     * @ORM\ManyToOne(targetEntity="MyDoctrine\Entity\Registration", inversedBy="attendees")
+     */
     protected $registration;
 
+    /**
+     * @ORM\Column(type="string", length=255, name="name_on_ticket")
+     */
     protected $name;
 
     /**

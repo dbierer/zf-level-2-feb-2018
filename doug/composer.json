@@ -24,7 +24,8 @@
         "phpunit/phpunit": "*",
         "zendframework/zend-test": "*",
         "zendframework/zend-mail": "*",
-        "zendframework/zend-view": "*"
+        "zendframework/zend-view": "*",
+        "doctrine/doctrine-orm-module": "^1.1"
     },
     "autoload": {
         "psr-4": {
@@ -32,6 +33,7 @@
             "Market\\": "module/Market/src/",
             "Model\\": "module/Model/src/",
             "Events\\": "module/Events/src/",
+            "MyDoctrine\\": "module/MyDoctrine/src/",
             "PhpSession\\": "module/PhpSession/src/"
         }
     },

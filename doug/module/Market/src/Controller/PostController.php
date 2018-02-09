@@ -13,6 +13,7 @@ class PostController extends AbstractActionController
     const ERROR_POST = 'ERROR: unable to validate item information';
     const ERROR_SAVE = 'ERROR: unable to save item to the database';
     const SUCCESS_POST = 'SUCCESS: item posted OK';
+    const EVENT_POST = 'market.post.event';
 
     use FlashTrait;
     use PostFormTrait;
@@ -32,9 +33,13 @@ class PostController extends AbstractActionController
             if ($this->postForm->isValid()) {
                 //*** FILE UPLOAD LAB: move uploaded file from /images folder into /images/<category>
                 //*** FILE UPLOAD LAB: reset $data['photo_filename'] to final filename /images/<category>/filename
-                if ($this->listingsTable->save($this->postForm->getData())) {
+                $goodData = $this->postForm->getData();
+                if ($this->listingsTable->save($goodData)) {
                     $this->flash->addMessage(self::SUCCESS_POST);
                     //*** EVENTMANAGER LAB: trigger a log event and pass the online market item title as a parameter
+                    $em = $this->getEventManager();
+                    $em->addIdentifiers([__CLASS__]);
+                    $em->trigger(self::EVENT_POST, $this, ['title' => $goodData['title']]);
                     //*** CACHE LAB: trigger event which signals clear cache
                     return $this->redirect()->toRoute('market');
                 } else {

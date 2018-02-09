@@ -2,6 +2,8 @@
 namespace MyDoctrine\Repository;
 
 //*** need "use" statements
+use Doctrine\ORM\EntityRepository;
+use MyDoctrine\Entity\ {Registration, Event};
 
 class RegistrationRepo extends EntityRepository
 {

@@ -9,6 +9,7 @@ use Zend\Filter;
 class SignupController extends AbstractActionController
 {
     //*** use the RepoTrait
+    use RepoTrait;
 
     protected $regDataFilter;
     public function indexAction()
@@ -18,7 +19,7 @@ class SignupController extends AbstractActionController
             return $this->eventSignup($eventId);
         }
         //*** use the event repository to find all events
-        $events = ???;
+        $events = $this->eventRepo->findAll();
         return new ViewModel(array('events' => $events));
     }
 
@@ -30,7 +31,7 @@ class SignupController extends AbstractActionController
     protected function eventSignup($eventId)
     {
         //*** use the event repository to find an event by ID
-        $event = ???;
+        $event = $this->eventRepo->findById($eventId);
         if (!$event) {
             return $this->notFoundAction();
         }
@@ -48,11 +49,15 @@ class SignupController extends AbstractActionController
     {
         $formData = $this->sanitizeData($formData);
         //*** save the registration
+        $reg = $this->registrationRepo->persist($event, $formData);
         $event->setRegistrations($reg);
         $this->eventRepo->save($event);
         foreach ($formData['ticket'] as $nameOnTicket) {
             //*** save all attendees for this registration
             //*** set the attendee back into the registration entity, and update it
+            $attendee = $this->attendeeRepo->persist($reg, $nameOnTicket);
+            $reg->setAttendees($attendee);
+            $this->registrationRepo->update($reg);
         }
         return true;
     }

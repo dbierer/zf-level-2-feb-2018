@@ -11,17 +11,21 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
+    'Zend\Cache',
+    'Zend\Paginator',
     'Zend\Mail',
     'Zend\Router',
     'Zend\Validator',
     'ZendDeveloperTools',
+    'DoctrineModule',
+    'DoctrineORMModule',
     'PhpSession',
     'Application',
     'Market',
     'Model',
     'Events',
     //*** need to activate this for the Modeling::Doctrine Lab
-    //'MyDoctrine',
+    'MyDoctrine',
     //*** need to activate this for the Security::Authentication Lab
     //'Login',
     //*** need to activate this for the Security::Encryption Lab

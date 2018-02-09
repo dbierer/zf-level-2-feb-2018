@@ -1,6 +1,7 @@
 <?php
 namespace Market;
 
+use Market\Controller\PostController;
 use Zend\Mvc\MvcEvent;
 
 class Module
@@ -10,6 +11,14 @@ class Module
     {
         $eventManager = $e->getApplication()->getEventManager();
         $eventManager->attach(MvcEvent::EVENT_DISPATCH, [$this, 'injectCategories']);
+        $shared = $eventManager->getSharedManager();
+        $shared->attach(PostController::class, 
+            PostController::EVENT_POST, 
+            function($e) {
+                $title = $e->getParam('title');
+                error_log($title);
+            }, 
+            100);
     }
     public function getConfig()
     {

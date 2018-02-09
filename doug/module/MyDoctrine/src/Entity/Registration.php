@@ -2,26 +2,50 @@
 namespace MyDoctrine\Entity;
 
 //*** need "use" statements
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use MyDoctrine\Entity\Attendee;
 
 //*** finish the entity annotation
 /**
+ * @ORM\Entity("MyDoctrine\Entity\Registration")
  * @ORM\Table("registration_d")
  */
 class Registration
 {
     //*** need annotations for each property
+    /**
+     * @ORM\Column(type="integer", length=11)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
     protected $id;
 
+    /**
+     * @ORM\Column(type="string", length=255, name="first_name")
+     */
     protected $firstName;
 
+    /**
+     * @ORM\Column(type="string", length=255, name="last_name")
+     */
     protected $lastName;
 
+    /**
+     * @ORM\Column(type="datetime", name="registration_time")
+     */
     protected $registrationTime;
 
     //*** configure a one to many relationship to Attendee
+    /**
+     * @ORM\OneToMany(targetEntity="MyDoctrine\Entity\Attendee", mappedBy="registration")
+     */
     protected $attendees = array();
 
     //*** configure a many to one relationship to to Event
+    /**
+     * @ORM\ManyToOne(targetEntity="MyDoctrine\Entity\Event", inversedBy="registrations")
+     */
     protected $event;
 
     public function __construct()
@@ -107,6 +131,7 @@ class Registration
      */
     public function setAttendees(Attendee $attendee) {
         //*** what goes here?
+        $this->attendees[] = $attendee;
     }
 
     /**
