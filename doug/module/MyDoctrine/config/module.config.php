@@ -54,6 +54,7 @@ return [
         'template_path_stack' => [__DIR__ . '/../view'],
     ],
     'doctrine' => [
+        // NOTE: "driver" here refers to how is the DBAL mapping done?
         'driver' => [
             // defines an annotation driver with two paths, and names it `my_annotation_driver`
             'doctrine_annotation_driver' => [

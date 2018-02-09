@@ -27,6 +27,11 @@ class Registration
     protected $firstName;
 
     /**
+     * @ORM\Column(type="string", length=8, name="middle_initial")
+     */
+    protected $middleInitial;
+
+    /**
      * @ORM\Column(type="string", length=255, name="last_name")
      */
     protected $lastName;
