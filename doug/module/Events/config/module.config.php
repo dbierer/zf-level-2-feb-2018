@@ -8,8 +8,17 @@ use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
     //*** ABSTRACT FACTORIES LAB: define an abstract factory to create the three table model classes
+    //    See: Event\Module class
     //*** EVENTMANAGER LISTENER AGGREGATE LAB: define listener aggregate as a container service
+    'service_manager' => [
+        'factories' => [
+            Listener\Aggregate::class => Listener\Factory\AggregateFactory::class,
+        ],
+    ],
     //*** EVENTMANAGER LISTENER AGGREGATE LAB: register the aggregate as a listener
+    'listeners' => [
+       Listener\Aggregate::class,
+    ],  
     'router' => [
         'routes' => [
             'events' => [

@@ -1,8 +1,13 @@
 <?php
 namespace Events\Model;
+
 use Zend\Db\Sql\Sql;
+use Events\Listener\Event;
+use Events\Traits\EventManagerTrait;
+
 class RegistrationTable extends Base
 {
+    use EventManagerTrait;
     public static $tableName = 'registration';
     // produces this SQL statement:
     // SELECT `r`.*, `a`.* FROM `registration` AS `r`
@@ -29,6 +34,8 @@ class RegistrationTable extends Base
              ]
         );
         //*** EVENTMANAGER LISTENER AGGREGATE LAB: trigger a modification event
+        $registration = $eventId . ':' . $firstName . ':' . $lastName;
+        $this->eventManager->trigger(Event::EVENT_MODIFICATION, $this, ['registration' => $registration]);
         return $this->tableGateway->getLastInsertValue();
     }
 }

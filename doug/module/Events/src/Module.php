@@ -28,6 +28,7 @@ class Module
                     $controller->setEventTable($container->get(Model\EventTable::class));
                     $controller->setRegTable($container->get(Model\RegistrationTable::class));
                     $controller->setAttendeeTable($container->get(Model\AttendeeTable::class));
+                    $controller->setFilter($container->get('events-reg-data-filter'));
                     return $controller;
                 },
             ],
@@ -76,6 +77,7 @@ class Module
                     {
                         $table     = new $requestedName();
                         $table->setTableGateway($container->get('events-db-adapter'));
+                        if (method_exists($table, 'setEventManager')) $table->setEventManager($container->get('EventManager'));
                         return $table;
                     }
                  },

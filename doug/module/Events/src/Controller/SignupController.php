@@ -9,6 +9,9 @@ use Zend\Filter;
 
 class SignupController extends AbstractActionController 
 {
+
+    protected $filter;
+
     use EventTableTrait;
     use RegTableTrait;
     use AttendeeTableTrait;
@@ -70,4 +73,8 @@ class SignupController extends AbstractActionController
         return $clean;
     }
 
+    public function setFilter($filter)
+    {
+        $this->filter = $filter;
+    }
 }
