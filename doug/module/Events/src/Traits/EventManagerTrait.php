@@ -10,4 +10,8 @@ trait EventManagerTrait
     {
         $this->eventManager = $em;
     }
+    public function getEventManager()
+    {
+        return $this->eventManager;
+    }
 }

@@ -7,7 +7,6 @@ use Events\Traits\EventManagerTrait;
 
 class RegistrationTable extends Base
 {
-    use EventManagerTrait;
     public static $tableName = 'registration';
     // produces this SQL statement:
     // SELECT `r`.*, `a`.* FROM `registration` AS `r`

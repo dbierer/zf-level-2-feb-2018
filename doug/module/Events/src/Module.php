@@ -77,7 +77,7 @@ class Module
                     {
                         $table     = new $requestedName();
                         $table->setTableGateway($container->get('events-db-adapter'));
-                        if (method_exists($table, 'setEventManager')) $table->setEventManager($container->get('EventManager'));
+                        $table->setEventManager($container->get('EventManager'));
                         return $table;
                     }
                  },
