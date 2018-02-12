@@ -1,0 +1,38 @@
+<?php
+namespace AccessControl\Acl;
+
+use Zend\Permissions\Acl\Acl;
+class MarketAcl extends Acl
+{
+    const DEFAULT_ROLE = 'guest';
+    public function __construct($config, $container)
+    {
+        //*** add roles w/ inheritance
+        foreach ($config['roles'] as $role => $inherits) {
+            if ($inherits) {
+                //*** add the role with inheritance
+            } else {
+                //*** add the role
+            }
+        }
+        //*** add resources
+        $resources = $config['resources'];
+        foreach ($resources as $key => $class) {
+            //*** add resources
+        }
+        // assign rights
+        foreach ($config['rights'] as $role => $assignment) {
+            foreach ($assignment as $key => $rights) {
+                if (array_key_exists('allow', $rights)) {
+                    $assert = (isset($rights['assert'])) ? $container->get($rights['assert']) : NULL;
+                    //*** assign allowed rights
+                }
+                if (array_key_exists('deny', $rights)) {
+                    $assert = (isset($rights['assert'])) ? $container->get($rights['assert']) : NULL;
+                    //*** assign denied rights
+                }
+            }
+        }
+        return $this;
+    }
+}
