@@ -9,24 +9,16 @@ use Login\Auth\CustomStorage;
 use Login\Security\Password;
 
 //*** add required "use" statements
+use Zend\Crypt\Password\Bcrypt;
+use Zend\Authentication\Storage\Session;
+use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\Adapter\DbTable\CallbackCheckAdapter;
 
 class Module
 {
     const VERSION = '3.0.3-dev';
 
-    public function onBootstrap(MvcEvent $e)
-    {
-        $em = $e->getApplication()->getEventManager();
-        $em->attach(MvcEvent::EVENT_DISPATCH, [$this, 'injectAuthService']);
-    }
-
-    public function injectAuthService(MvcEvent $e)
-    {
-        $layout = $e->getViewModel();
-        //*** use service container to retrieve the auth service
-        $authService = '???';
-        //*** inject auth service into layout
-    }
+    //*** NOTE: inject auth service into layout is done using Login\Listener\Aggregate
 
     public function getConfig()
     {
@@ -36,12 +28,6 @@ class Module
     public function getServiceConfig()
     {
         return [
-            'services' => [
-                //*** define callback which performs BCRYPT password verification
-                'login-auth-callback' => function ($hash, $password) {
-                    return '???'; //*** ???
-                },
-            ],
             'factories' => [
                 'login-db-adapter' => function ($container) {
                     return new Adapter($container->get('model-primary-adapter-config'));
@@ -50,6 +36,11 @@ class Module
                 'login-auth-adapter' => function ($container) {
                     return new CallbackCheckAdapter(
                         //*** add these arguments: auth adapter, tablename, identity col, password col and callback
+                        $container->get('login-db-adapter'),
+                        UsersTable::$tableName,
+                        UsersTable::$identityCol,
+                        UsersTable::$passwordCol,
+                        function ($hash, $password) {return Password::verify($password, $hash);}
                     );
                 },
                 'login-auth-storage' => function ($container) {
@@ -59,6 +50,8 @@ class Module
                 'login-auth-service' => function ($container) {
                     return new AuthenticationService(
                         //*** need storage and auth adapter as arguments
+                        $container->get('login-auth-storage'),
+                        $container->get('login-auth-adapter'));
                 },
             ],
         ];

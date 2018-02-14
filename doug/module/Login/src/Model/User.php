@@ -1,5 +1,6 @@
 <?php
 namespace Login\Model;
+use Application\Model\AbstractModel;
 class User extends AbstractModel
 {
     protected $mapping = [

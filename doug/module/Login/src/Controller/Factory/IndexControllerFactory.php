@@ -18,6 +18,7 @@ class IndexControllerFactory implements FactoryInterface
         $controller->setRegForm($container->get(RegForm::class));
         $controller->setLoginForm($container->get(LoginForm::class));
         //*** need to set the auth service
+        $controller->setAuthService($container->get('login-auth-service'));
         return $controller;
     }
 }

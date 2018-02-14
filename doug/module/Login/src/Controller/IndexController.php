@@ -51,13 +51,20 @@ class IndexController extends AbstractActionController
                 $user = $this->loginForm->getData();
                 //*** SECURITY::AUTHENTICATION LAB
                 //*** get the login adapter, set identity and credential and authenticate into $result
+                $adapter = $this->authService->getAdapter();
+                $adapter->setIdentity($user->getEmail());
+                $adapter->setCredential($user->getPassword());
                 //*** OAuth LAB: trigger the AuthOauth\Listener\OauthListenerAggregate::EVENT_LOGIN event
                 //*** OAuth LAB: be sure to pass $user as a parameter which will be used in the listener
                 $result = $adapter->authenticate();
                 if ($result->isValid()) {
                     //*** SECURITY::AUTHENTICATION LAB
                     //*** get storage and the result row object, and write Login\Model\User instance
+                    $storage = $this->authService->getStorage();
+                    $storage->write($user);
                     $message = self::LOGIN_SUCCESS;
+                    $this->flashMessenger()->addMessage($message);
+                    return $this->redirect()->toRoute('home');
                 } else {
                     $message = self::LOGIN_FAIL . '<br>' . implode('<br>', $result->getMessages());
                 }

@@ -11,6 +11,7 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
+    'Zend\Mvc\Plugin\FlashMessenger',
     'Zend\Cache',
     'Zend\Paginator',
     'Zend\Mail',
@@ -27,9 +28,9 @@ return [
     //*** need to activate this for the Modeling::Doctrine Lab
     'MyDoctrine',
     //*** need to activate this for the Security::Authentication Lab
-    //'Login',
+    'Login',
     //*** need to activate this for the Security::Encryption Lab
-    //'PrivateMessages',
+//    'PrivateMessages',
     //*** need to activate this for the Web Services::REST API Lab
     //'RestApi',
     //*** need to activate this for the Cross-Cutting-Concerns::Cache Lab

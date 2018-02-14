@@ -18,6 +18,7 @@ class UsersTable extends AbstractTable
     {
         $password = $user->getPassword();
         //*** save the password as a hash
+        $user->setPassword(Password::createHash($password));
         $data = $user->extract();
         return $this->tableGateway->insert($data);
     }

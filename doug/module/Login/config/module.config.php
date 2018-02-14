@@ -33,6 +33,8 @@ return [
             Form\Register::class => Form\Factory\RegisterFormFactory::class,
             Form\Question::class => Form\Factory\QuestionFormFactory::class,
             Model\UsersTable::class => Model\Factory\UsersTableFactory::class,
+            //*** SECURITY::AUTHENTICATION LAB: define aggregate as invokable
+            Listener\Aggregate::class => InvokableFactory::class,
         ],
         // override in /config/autoload/login.local.php
         'services' => [
@@ -40,6 +42,10 @@ return [
             //*** make sure this directory exists and is writeable!!!
             'login-storage-filename' => __DIR__ . '/../../../data/auth/storage.txt',
         ],
+    ],
+    'listeners' => [
+        //*** SECURITY::AUTHENTICATION LAB: add aggregate as listener
+        Listener\Aggregate::class
     ],
     'controllers' => [
         'factories' => [

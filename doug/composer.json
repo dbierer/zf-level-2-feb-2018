@@ -25,7 +25,10 @@
         "zendframework/zend-test": "*",
         "zendframework/zend-mail": "*",
         "zendframework/zend-view": "*",
-        "doctrine/doctrine-orm-module": "^1.1"
+        "doctrine/doctrine-orm-module": "^1.1",
+        "zendframework/zend-authentication": "^2.5",
+        "zendframework/zend-crypt": "^3.2",
+        "zendframework/zend-mvc-plugin-flashmessenger": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -34,6 +37,8 @@
             "Model\\": "module/Model/src/",
             "Events\\": "module/Events/src/",
             "MyDoctrine\\": "module/MyDoctrine/src/",
+            "Login\\": "module/Login/src/",
+            "PrivateMessages\\": "module/PrivateMessages/src/",
             "PhpSession\\": "module/PhpSession/src/"
         }
     },
