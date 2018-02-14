@@ -16,6 +16,7 @@ class IndexControllerFactory implements FactoryInterface
         $controller->setTable($container->get(MessagesTable::class));
         $controller->setSendForm($container->get(SendForm::class));
         //*** need to inject the authentication service
+        $controller->setAuthService($container->get('login-auth-service'));
         return $controller;
     }
 }

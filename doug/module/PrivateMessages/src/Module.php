@@ -29,6 +29,9 @@ class Module
                 'private-messages-hydrator' =>
                     function ($container) {
                         //*** assign the block cipher to the private hydrator and return the hydrator
+                        $hydrator = new PrivateHydrator();
+                        $hydrator->setBlockCipher($container->get('encryption-block-cipher'));
+                        return $hydrator;
                 },
             ],
         ];

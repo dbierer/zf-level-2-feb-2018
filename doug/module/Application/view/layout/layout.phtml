@@ -53,6 +53,7 @@ if (isset($this->authService)) {
                         <li class="active"><a href="<?= $this->url('events') ?>">Events</a></li>
                         <li class="active"><a href="<?= $this->url('doctrine') ?>">Doctrine</a></li>
                         <?php if ($user) : ?>
+                        <li class="active"><a href="<?= $this->url('messages') ?>">Messages</a></li>
                         <li class="active"><a href="<?= $this->url('login', ['action' => 'logout']) ?>">Logout</a></li>
                         <?php else : ?>
                         <li class="active"><a href="<?= $this->url('login', ['action' => 'login']) ?>">Login</a></li>

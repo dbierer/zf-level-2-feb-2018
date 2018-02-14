@@ -23,6 +23,8 @@ class MessagesTable
     public function setTableGateway(Adapter $adapter)
     {
         //*** set up the tablegateway to use a HydratingResultSet which incorporates the private hydrator
+        $hydroResultSet = new HydratingResultSet($this->hydrator, new Message());
+        $this->tableGateway = new TableGateway(static::$tableName, $adapter, NULL, $hydroResultSet);
     }
     public function findMessagesSent($email)
     {

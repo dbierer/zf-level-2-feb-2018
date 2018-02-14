@@ -30,7 +30,8 @@ return [
     //*** need to activate this for the Security::Authentication Lab
     'Login',
     //*** need to activate this for the Security::Encryption Lab
-//    'PrivateMessages',
+    'Encryption',
+    'PrivateMessages',
     //*** need to activate this for the Web Services::REST API Lab
     //'RestApi',
     //*** need to activate this for the Cross-Cutting-Concerns::Cache Lab

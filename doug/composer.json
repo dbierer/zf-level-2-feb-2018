@@ -38,6 +38,7 @@
             "Events\\": "module/Events/src/",
             "MyDoctrine\\": "module/MyDoctrine/src/",
             "Login\\": "module/Login/src/",
+            "Encryption\\": "module/Encryption/src/",
             "PrivateMessages\\": "module/PrivateMessages/src/",
             "PhpSession\\": "module/PhpSession/src/"
         }

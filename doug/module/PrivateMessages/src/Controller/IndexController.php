@@ -29,7 +29,7 @@ class IndexController extends AbstractActionController
     {
         //*** assign the authenticated identity from the authentication service to $user
         //*** (see the Login module)
-        $user = '???';
+        $user = $this->authService->getIdentity();
         //*** Access Control (i.e. who gets to send private messages) will be handled in the CROSS CUTTING CONCERNS::ACCESS CONTROL LAB
         $from = $this->sendForm->get('fromEmail');
         $from->setAttribute('value', $user->getEmail());
@@ -41,7 +41,7 @@ class IndexController extends AbstractActionController
     {
         //*** assign the authenticated identity from the authentication service to $user
         //*** (see the Login module)
-        $user = '???';
+        $user = $this->authService->getIdentity();
         //*** Access Control (i.e. who gets to send private messages) will be handled in the CROSS CUTTING CONCERNS::ACCESS CONTROL LAB
         $status = self::SEND_START;
         $request = $this->getRequest();
