@@ -1,4 +1,9 @@
 # ZEND FRAMEWORK FUNDAMENTALS II -- Course Notes
+Updated note: 
+
+https://github.com/dbierer/zf-level-2-feb-2018
+
+
 
 Left off with: http://localhost:8888/#/3/9
 
@@ -134,14 +139,6 @@ Fatal error: Interface 'Events\Controller\ServiceLocatorAwareInterface' not foun
 * Change this:
 ```
 $match->setParam('controller', self::DEFAULT_CONTROLLER);
-$match->setParam('action', self::DEFAULT_ACTION);
-```
-* To this:
-```
-// this does the equivalent of a forward:
-$response = $e->getResponse();
-$response->getHeaders()->addHeaderLine('Location', '/');
-$response->setStatusCode(302);
 return $response;
 ```
 
