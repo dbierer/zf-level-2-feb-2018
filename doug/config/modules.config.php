@@ -33,7 +33,7 @@ return [
     'Encryption',
     'PrivateMessages',
     //*** need to activate this for the Web Services::REST API Lab
-    //'RestApi',
+    'RestApi',
     //*** need to activate this for the Cross-Cutting-Concerns::Cache Lab
     //'Cache',
     //*** need to activate this for the Cross-Cutting-Concerns::ACL Lab

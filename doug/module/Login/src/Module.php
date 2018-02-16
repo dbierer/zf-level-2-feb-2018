@@ -9,10 +9,11 @@ use Login\Auth\CustomStorage;
 use Login\Security\Password;
 
 //*** add required "use" statements
-use Zend\Crypt\Password\Bcrypt;
-use Zend\Authentication\Storage\Session;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Adapter\DbTable\CallbackCheckAdapter;
+
+//*** this is not needed, but it's the storage most often used 
+// use Zend\Authentication\Storage\Session;
 
 class Module
 {

@@ -9,6 +9,10 @@ use Zend\Db\TableGateway\TableGateway;
 class ListingsTable extends TableGateway
 {
     const TABLE_NAME = 'listings';
+    public function findAll()
+    {
+        return $this->select();
+    }
     public function findByCategory($category)
     {
         return $this->select(['category' => $category]);

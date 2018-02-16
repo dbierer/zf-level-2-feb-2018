@@ -1,21 +1,39 @@
 <?php
 namespace RestApi;
 
-use Zend\Router\Http\Segment;
+use Zend\Router\Http\ {Literal,Segment};
 
 return [
     'router' => [
         'routes' => [
             'rest-api' => [
-                'type'    => Segment::class,
+                'type'    => Literal::class,
                 'options' => [
-                    'route'    => '/api[/:id]',
+                    'route'    => '/api',
                     'defaults' => [
                         'controller' => Controller\ApiController::class,
                     ],
-                    'constraints' => [
-                        'id' => '[0-9]+',
-                    ],
+                ],
+                'may_terminate' => TRUE,
+                'child_routes' => [
+					'with-id' => [
+						'type'    => Segment::class,
+						'options' => [
+							'route'    => '/[:id]',
+							'constraints' => [
+								'id' => '[0-9]+',
+							],
+						],
+					],
+					'category' => [
+						'type'    => Segment::class,
+						'options' => [
+							'route'    => '/category[/:category]',
+							'constraints' => [
+								'category' => '[a-z]+',
+							],
+						],
+					],
                 ],
             ],
         ],
@@ -32,6 +50,9 @@ return [
     ],
     'view_manager' => [
         //*** enable the ability to return a JsonModel
+        'strategies' => [
+			'ViewJsonStrategy',
+		],
     ],
     'access-control-config' => [
         'resources' => [

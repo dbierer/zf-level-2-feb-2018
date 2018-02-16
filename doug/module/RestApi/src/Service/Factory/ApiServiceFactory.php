@@ -12,7 +12,8 @@ class ApiServiceFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = NULL)
     {
         $service = new ApiService();
-        $service->setTable($container->get('model-listings-table'));
+        $table = $container->get('model-listings-table');
+        $service->setTable($table);
         return $service;
     }
 }

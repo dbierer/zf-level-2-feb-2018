@@ -13,10 +13,17 @@ class ApiController extends AbstractRestfulController
     public function get($id)
     {
         //*** define this method
+		return $this->service->fetchById($id);
     }
     public function getList()
     {
         //*** define this method
+        $category = $this->getEvent()->getRouteMatch()->getParam('category', NULL);
+        if ($category) {
+			return $this->service->fetchByCategory($category);
+		} else {
+			return $this->service->fetchAll();
+		}
     }
     public function setService(ApiService $service)
     {
