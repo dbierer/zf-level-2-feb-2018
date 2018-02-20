@@ -113,7 +113,7 @@ return [
             Form\PostFilter::class => Form\Factory\PostFilterFactory::class,
             Flash::class => InvokableFactory::class,
             //*** add missing factory for Market\Listener\CacheAggregate
-
+            Listener\CacheAggregate::class => Listener\Factory\CacheAggregateFactory::class,
             //*** DELEGATORS LAB
             Delegators\AddCsrf::class => Delegators\AddCsrf::class,
         ],
@@ -123,6 +123,7 @@ return [
     ],
     'listeners' => [
         //*** add entries to represent listeners defined as aggregates
+        Listener\CacheAggregate::class,
     ],
     'controllers' => [
         'factories' => [
@@ -149,6 +150,8 @@ return [
             'market-index' => 'Market\Controller\IndexController',
             //*** define a resource "market-view" which points to 'Market\Controller\ViewController',
             //*** define a resource "market-post" which points to 'Market\Controller\PostController',
+            'market-view' => 'Market\Controller\ViewController',
+            'market-post' => 'Market\Controller\PostController',
 
             //*** NAVIGATION LAB: define a market menu item as resources
             //'menu-market-view'  => '???',
@@ -158,6 +161,7 @@ return [
             'guest' => [
                 'market-index' => ['allow' => NULL],
                 //*** for the "market-view" resource guests are allowed all actions
+                'market-view' => ['allow' => NULL],
 
                 //*** NAVIGATION LAB: guests are allowed to see market index and market view menu items
                 //'menu-market-index' => ['allow' => NULL],
@@ -165,6 +169,7 @@ return [
             ],
             'user' => [
                 //*** for the "market-post" resource users are allowed all actions
+                'market-post' => ['allow' => NULL],
                 //*** NAVIGATION LAB: users are allowed to see the market post menu item
                 //'menu-market-post' => ['allow' => NULL],
             ],

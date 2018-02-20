@@ -35,9 +35,9 @@ return [
     //*** need to activate this for the Web Services::REST API Lab
     'RestApi',
     //*** need to activate this for the Cross-Cutting-Concerns::Cache Lab
-    //'Cache',
+    'Cache',
     //*** need to activate this for the Cross-Cutting-Concerns::ACL Lab
-    //'AccessControl',
+    'AccessControl',
     //*** need to activate this for the Cross-Cutting-Concerns::Oauth Lab
     //'AuthOauth',
     //*** need to activate this for the Advanced View::Translation Lab

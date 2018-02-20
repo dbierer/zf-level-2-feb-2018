@@ -75,7 +75,9 @@ return [
             ],
             'user' => [
                 //*** for the "login" resource, allow users to use the "logout"
+                'login'            => ['allow' => ['logout']],
                 //*** NAVIGATION LAB: allow users to see the "logout" menu option
+                'menu-login-logout' => ['allow' => NULL],
             ],
         ],
     ],

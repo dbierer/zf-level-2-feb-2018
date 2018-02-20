@@ -10,7 +10,7 @@ class CacheAggregateFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = NULL)
     {
         $aggregate = new CacheAggregate();
-        $aggregate->setServiceContainer($container);
+        $aggregate->setCache($container->get('cache-adapter'));
         return $aggregate;
     }
 }

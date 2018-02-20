@@ -25,6 +25,10 @@ class ApiController extends AbstractRestfulController
 			return $this->service->fetchAll();
 		}
     }
+    public function create($data)
+    {
+		return new JsonModel(['data'=> $this->getEvent()->getResult()]);
+	}
     public function setService(ApiService $service)
     {
         $this->service = $service;

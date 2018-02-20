@@ -54,12 +54,14 @@ return [
     'access-control-config' => [
         'resources' => [
             //*** define a resource "messages" which points to 'PrivateMessages\Controller\IndexController',
+            'messages' => 'PrivateMessages\Controller\IndexController',
             //*** NAVIGATION LAB: define a private message menu item as a resource
             'menu-messages'     => 'menu-messages',
         ],
         'rights' => [
             'user' => [
                 //*** for the "messages" resource users are allowed all actions
+                'messages' => ['allow' => NULL],
                 //*** NAVIGATION LAB: users are allowed to see any messages menu resource item
                 'menu-messages'     => ['allow' => NULL],
             ],

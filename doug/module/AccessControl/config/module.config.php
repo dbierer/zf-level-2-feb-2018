@@ -17,7 +17,9 @@ return [
         'roles' => [
             'guest' => NULL,
             //***   user inherits from guest
+            'user' => 'guest',
             //***   admin inherits from user
+            'admin' => 'user',
         ],
         //*** resources and rights are assigned in each module.config.php file using this format
         /*
@@ -38,7 +40,7 @@ return [
         */
         'assertions' => [
             'date-time-assert-config' => [
-                'start' => ['hour' => 9, 'minute' => 0, 'second' => 0],
+                'start' => ['hour' => 1, 'minute' => 0, 'second' => 0],
                 'stop'  => ['hour' => 22, 'minute' => 0, 'second' => 0],
             ],
         ],

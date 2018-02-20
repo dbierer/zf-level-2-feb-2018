@@ -71,6 +71,9 @@ return [
             //*** define a resource 'events-index' which points to 'Events\Controller\IndexController'
             //*** define a resource 'events-admin' which points to 'Events\Controller\AdminController',
             //*** define a resource 'events-sign' which points to 'Events\Controller\SignupController',
+            'events-index' => 'Events\Controller\IndexController',
+            'events-admin' => 'Events\Controller\AdminController',
+            'events-sign'  => 'Events\Controller\SignupController',
             //*** NAVIGATION LAB: assign menu items as resources
             'menu-events'        => 'menu-events',
             'menu-events-signup' => 'menu-events-signup',
@@ -80,12 +83,15 @@ return [
             'guest' => [
                 //*** for the 'events-index' resource, guests should be allowed any action
                 //*** for the 'events-sign' resource, guests should be allowed any action
+                'events-index' => ['allow' => NULL],
+                'events-sign'  => ['allow' => NULL],
                 //*** NAVIGATION LAB: guest can see the 'menu-events' and 'menu-events-signup' menu items
                 'menu-events'        => ['allow' => NULL],
                 'menu-events-signup' => ['allow' => NULL],
             ],
             'admin' => [
                 //*** for the 'events-admin' resource, admin should be allowed any action
+                'events-admin' => ['allow' => NULL],
                 //*** NAVIGATION LAB: admin can see the 'menu-admin' item
                 'menu-events-admin' => ['allow' => NULL, 'assert' => 'access-control-datetime-assert'],
             ],

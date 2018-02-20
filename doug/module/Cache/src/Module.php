@@ -4,6 +4,7 @@ namespace Cache;
 
 use Zend\Mvc\MvcEvent;
 //*** add the appropriate "use" statements
+use Zend\Cache\StorageFactory;
 
 class Module
 {
@@ -14,9 +15,9 @@ class Module
                 'cache-config' => [
                     'adapter' => [
                         //*** complete this configuration
-                        'name'      => ???,
-                        'options'   => ['ttl' => 3600],
-                        'cache_dir' => ???,
+                        'name'      => 'filesystem',
+                        'options'   => ['ttl' => 3600,
+                        'cache_dir' => realpath(__DIR__ . '/../../../data/cache')],
                     ],
                     'plugins' => [
                         // override in /config/autoload/development.local.php
@@ -27,6 +28,9 @@ class Module
             'factories' => [
                 'cache-adapter' => function ($container) {
                     //*** what to return?
+                    $config = $container->get('cache-config');
+                    //error_log(__METHOD__ . ':' . var_export($config, TRUE));
+                    return StorageFactory::factory($config);
                 },
             ],
         ];

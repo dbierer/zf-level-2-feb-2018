@@ -6,6 +6,7 @@ use Zend\View\Model\ViewModel;
 use Zend\Mvc\Controller\AbstractActionController;
 
 //*** add correct "use" statements
+use Market\Listener\CacheAggregate;
 
 class PostController extends AbstractActionController
 {
@@ -41,6 +42,8 @@ class PostController extends AbstractActionController
                     $em->addIdentifiers([__CLASS__]);
                     $em->trigger(self::EVENT_POST, $this, ['title' => $goodData['title']]);
                     //*** CACHE LAB: trigger event which signals clear cache
+                    $cacheKey = 'market_view_category_' . $data['category'];
+                    $em->trigger(CacheAggregate::EVENT_CLEAR_CACHE, $this, ['cacheKey' => $cacheKey]);
                     return $this->redirect()->toRoute('market');
                 } else {
                     $this->flash->addMessage(self::ERROR_SAVE);

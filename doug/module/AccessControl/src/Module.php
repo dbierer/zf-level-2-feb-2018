@@ -18,7 +18,10 @@ class Module
         return [
             'factories' => [
                 AclListenerAggregate::class => function ($container) {
-                    //*** inject the service container
+                    //*** inject dependencies
+                    $aggregate = new AclListenerAggregate();
+                    $aggregate->setAcl($container->get('access-control-market-acl'));
+                    $aggregate->setAuthService($container->get('login-auth-service'));
                     //*** return the listener aggregate
                     return $aggregate;
                 },

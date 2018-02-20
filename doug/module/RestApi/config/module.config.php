@@ -32,6 +32,9 @@ return [
 							'constraints' => [
 								'category' => '[a-z]+',
 							],
+							'defaults' => [
+								'category' => 'free',
+							],
 						],
 					],
                 ],
