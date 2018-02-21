@@ -12,6 +12,8 @@ use Zend\Router\Http\Segment;
 use Zend\View\Helper as ViewHelper;
 use Zend\Form\View\Helper as FormHelper;
 use Zend\ServiceManager\Factory\InvokableFactory;
+//*** NAVIGATION LAB: activate the NavigationAbstractServiceFactory
+use Zend\Navigation\Service\NavigationAbstractServiceFactory;
 
 return [
     'router' => [
@@ -41,6 +43,12 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
+        ],
+    ],
+    'service_manager' => [
+        //*** NAVIGATION LAB: activate the default navigation factory
+        'abstract_factories' => [
+            NavigationAbstractServiceFactory::class
         ],
     ],
     'view_manager' => [

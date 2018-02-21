@@ -65,6 +65,12 @@ return [
     'view_manager' => [
         'template_path_stack' => [__DIR__ . '/../view'],
     ],
+    //*** NAVIGATION LAB: define default navigation
+    'navigation' => [
+        'default' => [
+            'events' => ['label' => 'Events', 'route' => 'events', 'resource' => 'menu-events']
+        ],
+    ],
     //*** ACL LAB
     'access-control-config' => [
         'resources' => [

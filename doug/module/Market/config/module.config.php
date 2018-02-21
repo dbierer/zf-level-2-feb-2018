@@ -143,6 +143,13 @@ return [
             'leftLinks' => Helper\LeftLinks::class,
         ],
     ],
+    //*** NAVIGATION LAB: define default navigation
+    'navigation' => [
+        'default' => [
+            'market-home' => ['label' => 'Home', 'order' => -100, 'route' => 'market', 'resource' => 'menu-market-index'],
+            'market-post' => ['label' => 'Post', 'route' => 'market/post', 'resource' => 'menu-market-post'],
+        ],
+    ],
     //*** ACL LAB
     'access-control-config' => [
         'resources' => [
@@ -154,8 +161,8 @@ return [
             'market-post' => 'Market\Controller\PostController',
 
             //*** NAVIGATION LAB: define a market menu item as resources
-            //'menu-market-view'  => '???',
-            //'menu-market-post'  => '???',
+            'menu-market-index' => 'menu-market-index',
+            'menu-market-post'  => 'menu-market-post',
         ],
         'rights' => [
             'guest' => [
@@ -164,14 +171,13 @@ return [
                 'market-view' => ['allow' => NULL],
 
                 //*** NAVIGATION LAB: guests are allowed to see market index and market view menu items
-                //'menu-market-index' => ['allow' => NULL],
-                //'menu-market-view' => ['allow' => NULL],
+                'menu-market-index' => ['allow' => NULL],
             ],
             'user' => [
                 //*** for the "market-post" resource users are allowed all actions
                 'market-post' => ['allow' => NULL],
                 //*** NAVIGATION LAB: users are allowed to see the market post menu item
-                //'menu-market-post' => ['allow' => NULL],
+                'menu-market-post' => ['allow' => NULL],
             ],
         ],
     ],

@@ -46,23 +46,22 @@ if (isset($this->authService)) {
                     </a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <!-- //*** use the "navigation()" view helper instead of hard-coding menu items -->
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="<?= $this->url('market') ?>">Home</a></li>
-                        <li class="active"><a href="<?= $this->url('market/post') ?>">Post</a></li>
-                        <li class="active"><a href="<?= $this->url('events') ?>">Events</a></li>
-                        <li class="active"><a href="<?= $this->url('doctrine') ?>">Doctrine</a></li>
-                        <?php if ($user) : ?>
-                        <li class="active"><a href="<?= $this->url('messages') ?>">Messages</a></li>
-                        <li class="active"><a href="<?= $this->url('login', ['action' => 'logout']) ?>">Logout</a></li>
-                        <?php else : ?>
-                        <li class="active"><a href="<?= $this->url('login', ['action' => 'login']) ?>">Login</a></li>
-                        <?php endif; ?>
-                    </ul>
-                    <div style="float:right;vertical-align:bottom;">
-                        <br>
-                        <span style="color:white;">Logged In As: <?= ($user) ? $user->getEmail() : 'Guest' ?></span>
-                    </div>
+                    <!-- //*** NAVIGATION LAB: use the "navigation()" view helper instead of hard-coding menu items -->
+                    <!-- set role and acl to navigation -->
+                    <?php
+                        $user = NULL;
+                        if ($this->authService) {
+                            $user = $this->authService->getIdentity();
+                        }
+                        if (isset($this->acl)) {
+                            $this->navigation('default')->setAcl($this->acl);
+                            $role = ($user) ? $user->getRole() : 'guest';
+                            $this->navigation('default')->setRole($role);
+                        }
+                    ?>
+                    <?= $this->navigation('default')->menu()->setUlClass('nav navbar-nav'); ?>
+                    <!-- //*** SECURITY:AUTHENTICATION LAB: if auth service has an identity, display it, otherwise "guest" -->
+                    <span style="float:right;color:white;">Logged in as: <?= ($user) ? $user->getUsername() : 'guest'; ?></span>
                 </div>
             </div>
         </nav>

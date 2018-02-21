@@ -11,6 +11,7 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
+    'Zend\Navigation',
     'Zend\Mvc\Plugin\FlashMessenger',
     'Zend\Cache',
     'Zend\Paginator',
@@ -39,7 +40,7 @@ return [
     //*** need to activate this for the Cross-Cutting-Concerns::ACL Lab
     'AccessControl',
     //*** need to activate this for the Cross-Cutting-Concerns::Oauth Lab
-    //'AuthOauth',
+    'AuthOauth',
     //*** need to activate this for the Advanced View::Translation Lab
     //'Translation',
     //*** need to activate this for the Middleware::Psr7Bridge Lab

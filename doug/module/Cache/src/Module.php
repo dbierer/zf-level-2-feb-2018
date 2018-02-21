@@ -16,12 +16,15 @@ class Module
                     'adapter' => [
                         //*** complete this configuration
                         'name'      => 'filesystem',
-                        'options'   => ['ttl' => 3600,
-                        'cache_dir' => realpath(__DIR__ . '/../../../data/cache')],
+                        'options'   => [
+							'ttl' => 3600,
+							'cache_dir' => realpath(__DIR__ . '/../../../data/cache'),
+                        ],
                     ],
                     'plugins' => [
                         // override in /config/autoload/development.local.php
-                        'exception_handler' => ['throw_exceptions' => FALSE],
+                        'exception_handler' => [
+							'throw_exceptions' => file_exists(__DIR__ . '/../../../config/autoload/development.local.php')],
                     ],
                 ],
             ],

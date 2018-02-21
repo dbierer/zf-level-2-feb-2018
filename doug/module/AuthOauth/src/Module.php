@@ -4,19 +4,23 @@ namespace AuthOauth;
 use UnexpectedValueException;
 use Zend\Mvc\ {MvcEvent, InjectApplicationEventInterface};
 use Zend\Session\Container;
+use Login\Event\LoginEvent;
 
 use AuthOauth\Generic\ {User, Hydrator};
 use AuthOauth\Adapter\GoogleAdapter;
 
 class Module
 {
-    //*** attach a 'setLink' to the "LOGIN_VIEW" event (see Login\Controller\IndexController)
+
     public function onBootstrap(MvcEvent $e)
     {
+        $shared = $e->getApplication()->getEventManager()->getSharedManager();
+        $shared->attach('*', LoginEvent::EVENT_LOGIN_VIEW, [$this, 'injectLinks'], 99);
     }
-    //*** set a variable "localeLink" in the view model passed as a parameter
-    public function setLink($e)
+    public function injectLinks($e)
     {
+        $viewModel = $e->getParam('viewModel');
+        $viewModel->setVariable('googleLink', 1);
     }
     public function getModuleDependencies()
     {
@@ -42,6 +46,7 @@ class Module
                     return new Container(__NAMESPACE__);
                 },
                 //*** assign the google adapter service to AdapterAbstractFactory
+                'auth-oauth-adapter-google' => Factory\AdapterAbstractFactory::class,
             ],
             'abstract_factories' => [
                 Factory\AdapterAbstractFactory::class,

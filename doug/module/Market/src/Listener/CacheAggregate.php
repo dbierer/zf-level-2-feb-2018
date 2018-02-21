@@ -1,18 +1,14 @@
 <?php
 namespace Market\Listener;
 
-use Market\Controller\MarketController;
-
 use Zend\Mvc\MvcEvent;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
-use Application\Traits\ServiceContainerTrait;
 
 class CacheAggregate implements ListenerAggregateInterface
 {
 
     const EVENT_CLEAR_CACHE = 'market-event-clear-cache';
-    const OUTPUT_CACHE_KEY  = 'market-index-index';
     const RECACHE_KEY       = 'recache-this-key';
 
 
@@ -59,9 +55,9 @@ class CacheAggregate implements ListenerAggregateInterface
             // matched route == market/view/category | market/view/item
             $cacheKey   = str_replace('/', '_', $matched) . '_';
             if ($itemId = $routeMatch->getParam('itemId')) {
-                $cacheKey .= 'item_' . $itemId;
+                $cacheKey .= $itemId;
             } elseif ($category = $routeMatch->getParam('category')) {
-                $cacheKey .= 'category_' . $category;
+                $cacheKey .= $category;
             }
             if ($this->cache->hasItem($cacheKey)) {
                 error_log('Retrieved from Cache: ' . $cacheKey);
@@ -75,7 +71,7 @@ class CacheAggregate implements ListenerAggregateInterface
     {
         //*** complete the logic for this method
         $routeMatch = $e->getRouteMatch();
-        if ($cacheKey = $routeMatch->getParam(self::RECACHE_KEY)) {
+        if ($routeMatch && $cacheKey = $routeMatch->getParam(self::RECACHE_KEY)) {
             $this->cache->setItem($cacheKey, $e->getResponse());
             error_log('Saved to Cache: ' . $cacheKey);
         }

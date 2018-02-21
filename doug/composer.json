@@ -30,7 +30,10 @@
         "zendframework/zend-crypt": "^3.2",
         "zendframework/zend-json": "^3.1",
         "zendframework/zend-mvc-plugin-flashmessenger": "^1.0",
-        "zendframework/zend-permissions-acl": "^2.6"
+        "zendframework/zend-permissions-acl": "^2.6",
+        "zendframework/zend-navigation": "*",
+        "league/oauth2-client": "*",
+        "league/oauth2-google": "*"
     },
     "autoload": {
         "psr-4": {
@@ -45,6 +48,7 @@
             "RestApi\\": "module/RestApi/src/",
             "Cache\\": "module/Cache/src/",
             "AccessControl\\": "module/AccessControl/src/",
+            "AuthOauth\\": "module/AuthOauth/src/",
             "PhpSession\\": "module/PhpSession/src/"
         }
     },

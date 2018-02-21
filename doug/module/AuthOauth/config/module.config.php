@@ -27,7 +27,7 @@ return [
     'service_manager' => [
         'aliases' => [
             //*** alias the authentication service from the Login module
-            'auth-oauth-service' => '???',
+            'auth-oauth-service' => 'login-auth-service',
         ],
         'services' => [
             'auth-oauth-callback' => '/oauth/callback',
@@ -46,6 +46,7 @@ return [
             Generic\User::class => InvokableClassFactory::class,
             Generic\Hydrator::class => InvokableClassFactory::class,
             //*** add an entry for AdapterAbstractFactory
+            Factory\AdapterAbstractFactory::class => InvokableClassFactory::class,
         ],
     ],
     'access-control-config' => [

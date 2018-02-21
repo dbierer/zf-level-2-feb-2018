@@ -4,6 +4,7 @@ namespace Login\Controller;
 use Application\Traits\FlashMessengerTrait;
 use Login\Model\ {User, UsersTable};
 use Login\Form\ {Login as LoginForm, Register as RegForm};
+use Login\Event\LoginEvent;
 
 use Zend\View\Model\ViewModel;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -60,6 +61,10 @@ class IndexController extends AbstractActionController
                 if ($result->isValid()) {
                     //*** SECURITY::AUTHENTICATION LAB
                     //*** get storage and the result row object, and write Login\Model\User instance
+                    // omit "password" column: don't want that to appear in storage
+                    $obj = $adapter->getResultRowObject(NULL, ['password']);
+                    // getResultRowObject() returns a stdClass instance ... need to hydrate into a User instance
+                    $user = new User((array) $obj);
                     $storage = $this->authService->getStorage();
                     $storage->write($user);
                     $message = self::LOGIN_SUCCESS;
@@ -78,6 +83,7 @@ class IndexController extends AbstractActionController
                                     'message' => $message]);
         $viewModel->setTemplate('login/index/index');
         //*** OAuth + TRANSLATION LABS: trigger a "LOGIN_VIEW" event and pass the view model as a parameter
+        $this->getEventManager()->trigger(LoginEvent::EVENT_LOGIN_VIEW, $this, ['viewModel' => $viewModel]);
         return $viewModel;
     }
     public function logoutAction()
