@@ -66,4 +66,5 @@ return [
     'Categories' => 'Catégories',
     'Logged in as' => 'Connecté en tant que',
     'All rights reserved' => 'Tous les droits sont réservés',
+    'Unable to find listing!' => 'La liste ne se trouve pas!',
 ];

@@ -1,4 +1,6 @@
 <!-- //*** PSR7BRIDGE LAB:: get the default locale using the PHP Locale class -->
+<?php $locale = Locale::getDefault(); ?>
+
 <div class="row">
     <div class="col-md-8">
         <div class="panel panel-default" style="height:500px;">
@@ -13,7 +15,7 @@
                         <!-- //*** PSR7BRIDGE LAB:: format the date using the "dateFormat()" view helper using the locale given -->
                         <tr>
                             <th width="30%"><?= $message->getToEmail(); ?></th>
-                            <td width="30%"><?= $message->getDateTime(); ?></td>
+                            <td width="30%"><?php echo $this->dateFormat(new DateTime($message->getDateTime()), \IntlDateFormatter::LONG,\IntlDateFormatter::NONE); ?></td>
                             <td width="60%"><?= $message->getMessage(); ?></td>
                         </tr>
                     <?php endforeach; ?>
@@ -33,7 +35,7 @@
                         <!-- //*** PSR7BRIDGE LAB:: format the date using the "dateFormat()" view helper using the locale given -->
                         <tr>
                             <th width="30%"><?= $message->getFromEmail(); ?></th>
-                            <td width="30%"><?= $message->getDateTime(); ?></td>
+                            <td width="30%"><?php echo $this->dateFormat(new DateTime($message->getDateTime()), \IntlDateFormatter::LONG,\IntlDateFormatter::NONE); ?></td>
                             <td width="60%"><?= $message->getMessage(); ?></td>
                         </tr>
                     <?php endforeach; ?>

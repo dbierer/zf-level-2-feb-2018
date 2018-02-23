@@ -42,7 +42,7 @@ return [
     //*** need to activate this for the Cross-Cutting-Concerns::Oauth Lab
     'AuthOauth',
     //*** need to activate this for the Advanced View::Translation Lab
-    //'Translation',
+    'Translation',
     //*** need to activate this for the Middleware::Psr7Bridge Lab
     //'DefaultLocale',
     //*** need to activate this for the Middleware::Listener Lab

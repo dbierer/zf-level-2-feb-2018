@@ -49,10 +49,6 @@ if (isset($this->authService)) {
                     <!-- //*** NAVIGATION LAB: use the "navigation()" view helper instead of hard-coding menu items -->
                     <!-- set role and acl to navigation -->
                     <?php
-                        $user = NULL;
-                        if ($this->authService) {
-                            $user = $this->authService->getIdentity();
-                        }
                         if (isset($this->acl)) {
                             $this->navigation('default')->setAcl($this->acl);
                             $role = ($user) ? $user->getRole() : 'guest';
@@ -61,7 +57,14 @@ if (isset($this->authService)) {
                     ?>
                     <?= $this->navigation('default')->menu()->setUlClass('nav navbar-nav'); ?>
                     <!-- //*** SECURITY:AUTHENTICATION LAB: if auth service has an identity, display it, otherwise "guest" -->
-                    <span style="float:right;color:white;">Logged in as: <?= ($user) ? $user->getUsername() : 'guest'; ?></span>
+                    <?php
+                    // to get menu helper:
+                    $menu = $this->navigation('default')->menu();
+                    ?>
+                    <span style="float:right;color:white;">
+                        <?= $this->translate('Logged in as'); ?>: <?= ($user) ? $user->getUsername() : 'guest'; ?>
+                        &nbsp;[<?= \Locale::getDefault(); ?>]
+                    </span>
                 </div>
             </div>
         </nav>
@@ -69,7 +72,7 @@ if (isset($this->authService)) {
 
             <div class="row">
 
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">Categories</h3>
@@ -80,14 +83,14 @@ if (isset($this->authService)) {
                     </div>
                 </div>
 
-                <div class="col-md-10">
+                <div class="col-md-9">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <?= $this->content ?>
                         </div>
                         <hr>
                         <footer>
-                            <p>&copy; 2005 - <?= date('Y') ?> by Zend Technologies Ltd. All rights reserved.</p>
+                            <p>&copy; 2005 - <?= date('Y') ?> by Zend Technologies Ltd. <?= $this->translate('All rights reserved.'); ?></p>
                         </footer>
                     </div>
                 </div>

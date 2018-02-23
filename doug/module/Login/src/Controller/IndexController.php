@@ -49,7 +49,10 @@ class IndexController extends AbstractActionController
             if (!$this->loginForm->isValid()) {
                 $message = self::FORM_INVALID;
             } else {
+		//*** TRANSLATION LAB: grab locale info from form 
                 $user = $this->loginForm->getData();
+                $locale = $user->getLocale() ?? \Locale::getDefault();
+		\Locale::setDefault($locale);
                 //*** SECURITY::AUTHENTICATION LAB
                 //*** get the login adapter, set identity and credential and authenticate into $result
                 $adapter = $this->authService->getAdapter();
@@ -65,6 +68,8 @@ class IndexController extends AbstractActionController
                     $obj = $adapter->getResultRowObject(NULL, ['password']);
                     // getResultRowObject() returns a stdClass instance ... need to hydrate into a User instance
                     $user = new User((array) $obj);
+		    //*** TRANSLATION LAB: override locale coming from database with value from form 
+                    $user->setLocale($locale);
                     $storage = $this->authService->getStorage();
                     $storage->write($user);
                     $message = self::LOGIN_SUCCESS;

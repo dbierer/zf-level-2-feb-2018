@@ -49,6 +49,8 @@
             "Cache\\": "module/Cache/src/",
             "AccessControl\\": "module/AccessControl/src/",
             "AuthOauth\\": "module/AuthOauth/src/",
+            "Translation\\": "module/Translation/src/",
+            "DefaultLocale\\": "module/DefaultLocale/src/",
             "PhpSession\\": "module/PhpSession/src/"
         }
     },

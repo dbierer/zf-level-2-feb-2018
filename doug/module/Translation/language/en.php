@@ -56,7 +56,7 @@ return [
     'Online Market Posting'=> 'Online Market Posting',
     'Help us to prevent SPAM!' => 'Help us to prevent SPAM!',
     'Please select a category' => 'Please select a category',
-    'Enter price as nnn.nn' => 'Enter price as nnn.nn',
+    'Enter price as nnn.nn' => 'Enter price as "nnn.nn"',
     'Enter the delete code for this item' => 'Enter the delete code for this item',
     'Enter a suitable description for this posting' => 'Enter a suitable description for this posting',
     'The expiration date will be calculated from today' => 'The expiration date will be calculated from today',
@@ -69,4 +69,5 @@ return [
     'Categories' => 'Categories',
     'Logged in as' => 'Logged in as',
     'All rights reserved.' => 'All rights reserved.',
+    'Unable to find listing!' => 'Unable to find listing!',
 ];

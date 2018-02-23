@@ -17,7 +17,9 @@ class LeftLinks extends AbstractHelper
 		if (isset($values) && is_array($values)) {
 			$html .= '<ul  style="list-style-type: none;">' . PHP_EOL;
 			foreach ($values as $item) {
-                $html .= str_replace('//', '/', sprintf("<li><a href=\"%s/%s\">%s</a></li>\n", $urlPrefix, $item, $item));
+                            //*** TRANSLATION LAB: translate categories
+                	    $transItem = $this->getView()->translate($item);
+                	    $html .= str_replace('//', '/', sprintf("<li><a href=\"%s/%s\">%s</a></li>\n", $urlPrefix, $item, $transItem));
 			}
 			$html .= '</ul>' . PHP_EOL;
 		}

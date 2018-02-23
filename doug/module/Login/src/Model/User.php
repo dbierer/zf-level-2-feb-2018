@@ -10,5 +10,6 @@ class User extends AbstractModel
         'password' => 'password',
         'securityquestion' => 'security_question',
         'securityanswer' => 'security_answer',
+        'locale' => 'locale',
     ];
 }

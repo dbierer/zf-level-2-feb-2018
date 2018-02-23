@@ -37,7 +37,7 @@
         <table width="60%" cellspacing="5px" cellpadding="5px">
             <tr>
                 <!-- //*** I18N FORMATTING LAB: display using I18N currency view helper -->
-                <td><h4><?php echo number_format($this->item->price, 2); ?></h4></td>
+                <td><h4><?php echo $this->currencyFormat($this->item->price, $code, TRUE); ?></h4></td>
                 <td><h4><?php echo $this->escapeHtml($this->item->city); ?></h4></td>
                 <td><h4><?php echo $this->escapeHtml($this->item->country); ?></h4></td>
             </tr>
@@ -51,19 +51,23 @@
             <div class="listingNotes">
             <table cellspacing="10px" cellpadding="10px" class="tableClass">
                 <!-- //*** TRANSLATION LAB: display using translate view helper -->
-                <tr><th>Category</th><td class="tableSpace">&nbsp;</td><td><?php echo $this->escapeHtml($this->item->category); ?></td></tr>
-                <tr><th>Posted</th><td class="tableSpace">&nbsp;</td><td><?php echo $this->escapeHtml($this->item->date_created); ?></td></tr>
-                <tr><th>Expires</th><td class="tableSpace">&nbsp;</td><td><?php echo $this->escapeHtml($this->item->date_expires); ?></td></tr>
-                <tr><th>Name</th><td class="tableSpace">&nbsp;</td><td><?php echo $this->escapeHtml($this->item->contact_name); ?></td></tr>
-                <tr><th>Phone</th><td class="tableSpace">&nbsp;</td><td><?php echo $this->escapeHtml($this->item->contact_phone); ?></td></tr>
-                <tr><th>Email</th><td class="tableSpace">&nbsp;</td><td><?php echo $this->escapeHtml($this->item->contact_email); ?></td></tr>
+                <tr><th><?= $this->translate('Category') ?></th><td class="tableSpace">&nbsp;</td><td><?php echo $this->escapeHtml($this->item->category); ?></td></tr>
+                <tr><th><?= $this->translate('Posted') ?></th><td class="tableSpace">&nbsp;</td>
+                    <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($this->item->date_created), 
+                              \IntlDateFormatter::LONG,\IntlDateFormatter::NONE)); ?></td></tr>
+                <tr><th><?= $this->translate('Expires') ?></th><td class="tableSpace">&nbsp;</td>
+                    <td><?php echo $this->escapeHtml($this->dateFormat(new DateTime($this->item->date_expires), 
+                                   \IntlDateFormatter::LONG,\IntlDateFormatter::NONE)); ?></td></tr>
+                <tr><th><?= $this->translate('Name') ?></th><td class="tableSpace">&nbsp;</td><td><?php echo $this->escapeHtml($this->item->contact_name); ?></td></tr>
+                <tr><th><?= $this->translate('Phone') ?></th><td class="tableSpace">&nbsp;</td><td><?php echo $this->escapeHtml($this->item->contact_phone); ?></td></tr>
+                <tr><th><?= $this->translate('Email') ?></th><td class="tableSpace">&nbsp;</td><td><?php echo $this->escapeHtml($this->item->contact_email); ?></td></tr>
             </table>
         </div>
         <hr>
         <p><?php echo $this->escapeHtml($this->item->description); ?></p>
         <hr />
         <?php else : ?>
-            Unable to find listing!
+            <?= $this->translate('Unable to find listing!'); ?>
         <?php endif; ?>
     </p>
 </div>
